@@ -1,13 +1,19 @@
-import pandas as py
-import numpy as np 
+import numpy as np
+import pandas as pd
+# %matplotlib inline
+from flask import json
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from tabulate import tabulate
 
 def process_csv(file_path):
-    # Read CSV file into a pandas DataFrame
-    df = pd.read_csv(file_path)
-    # Perform data processing using pandas and numpy
-    processed_data =  '' ;# temp 
     
-    # Convert processed data to JSON format
-    processed_data_json = processed_data.to_json()
+    df = pd.read_csv(file_path, low_memory=False)
     
-    return processed_data_json
+    data_dict = df.to_dict(orient='records')
+    json_data = json.dumps(data_dict, indent=4)
+
+    return json_data

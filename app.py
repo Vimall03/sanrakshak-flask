@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, jsonify
 from flask_cors import CORS
-from process_csv import process_csv
+from upload.process_csv import process_csv
 
 app = Flask(__name__)
 CORS(app)
