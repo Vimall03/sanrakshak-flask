@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request, jsonify
 from flask_cors import CORS
+from process_csv import process_csv
 
 app = Flask(__name__)
 CORS(app)
@@ -14,9 +15,12 @@ def upload_file():
         # Handle file upload logic here
         file = request.files['file']
         # Process the file as needed
-        print('file recieved')
+        file.save('temp.csv')
         
-        return jsonify('Files recieved Successfully')
-    
+        processed_data_json = process_csv('temp.csv')
+        
+        print('file recieved')
+        return jsonify(processed_data_json)
+
 if __name__ == "__main__":
     app.run(host='localhost', port=5000, debug=True)  
